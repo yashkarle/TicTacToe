@@ -35,28 +35,41 @@ func (t *TicTacToe) isWinner() bool {
                (t.board[0][2] == t.turn && t.board[1][1] == t.turn && t.board[2][0] == t.turn)
 }
 
+func (t *TicTacToe) markSpot(row int, col int) {
+	t.board[row][col] = t.turn
+	t.printBoard()
+
+	if t.isWinner() {
+		fmt.Println(t.turn + " wins!")
+	}
+
+	if t.turn == "X" {
+    		t.turn = "O"
+  	} else {
+    		t.turn = "X"
+  	}
+}
+
 func (t *TicTacToe) makeMove() {
 	var row,col int
 
 	fmt.Println("Which row would you like to mark?")
-	fmt.Scanf("%d",&row);
+	fmt.Scanf("%d",&row)
 	fmt.Println("Which row would you like to mark?")
-	fmt.Scanf("%d",&col);
+	fmt.Scanf("%d",&col)
 
-	t.markSpot(row,col);
+	t.markSpot(row,col)
 }
 
 func main() {
 	gameBoard := TicTacToe{make([][]string,3),"X"}
-	gameBoard.initBoard();
-	gameBoard.printBoard();
+	gameBoard.initBoard()
+	gameBoard.printBoard()
 
 	for i := 0; i < 9; i++ {
     		if gameBoard.isWinner() {
-      			break;
+      			break
     		}
     		gameBoard.makeMove()
   	}
-
-	fmt.Println(gameBoard);
 }
